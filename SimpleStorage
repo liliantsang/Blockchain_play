@@ -1,0 +1,21 @@
+pragma solidity ^0.4.0;
+
+contract SimpleStorage {
+   uint storedData;
+   address public creator;
+
+   function SimpleStorage(uint initValue) public {
+       creator = msg.sender;
+       storedData = initValue;
+   }
+
+   function set(uint x) public {
+       require(msg.sender == creator);
+       require(x <= 100);
+       storedData = x;
+   }
+
+   function get() constant public returns (uint retVal) {
+       return storedData;
+   }
+}
